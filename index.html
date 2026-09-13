@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مفروشات الزهرة | ملايات يدوية الصنع</title>
+<meta name="description" content="ملايات ومفروشات يدوية الصنع بخامات ناعمة — عامرية، 3D، استرايب، وأطقم عروسة">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== الهيدر ===== -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img src="assets/logo.jpg" alt="مفروشات الزهرة" class="brand-logo">
+      
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="#home" class="nav-link active" data-section="home">الرئيسية</a>
+      <a href="#products" class="nav-link" data-section="products">تشكيلتنا</a>
+      <a href="#trending" class="nav-link" data-section="trending">الأكثر طلبًا</a>
+      <a href="#about" class="nav-link" data-section="about">من نحن</a>
+      <a href="#contact" class="nav-link" data-section="contact">تواصل معنا</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="menu-toggle" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" width="20" height="20"><line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" id="search-toggle" aria-label="بحث">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" id="cart-toggle" aria-label="عربة الشراء">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 4h2l2.2 11.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-bar" id="search-bar">
+    <div class="search-bar-inner">
+      <input type="text" id="search-input" placeholder="دوري على ملاية بالاسم…">
+      <button class="icon-btn" id="search-close" aria-label="إغلاق البحث">✕</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== سكشن الهيرو ===== -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">صناعة يدوية بحب</p>
+      <h1>نامي بين الألوان<br><span>والدفا</span></h1>
+      <p class="hero-sub">ملايات ومفروشات يدوية الصنع، بخامات ناعمة تجمع بين الراحة والجمال في أوضتك.</p>
+      <a href="#products" class="btn btn-primary">تسوقي التشكيلة</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-blob" aria-hidden="true"></div>
+      <img src="images/hero.jpg" alt="ملايات ملونة يدوية الصنع على سرير مريح"
+           class="hero-photo"
+           onerror="this.closest('.hero-visual').classList.add('hero-fallback')">
+    </div>
+  </div>
+</section>
+
+<!-- ===== سكشن المنتجات ===== -->
+<section class="products-section" id="products">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>تشكيلتنا المفضلة</h2>
+      <p>كل ملاية بتيجي طقم كامل مع المخدات</p>
+    </div>
+
+    <div class="filters-row">
+      <div class="category-filters" id="category-filters">
+        <button class="filter-pill active" data-category="الكل">الكل</button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      <!-- الكروت بتتحط هنا عن طريق JS -->
+    </div>
+
+    <p class="empty-state" id="empty-state" hidden>مفيش نتايج مطابقة للبحث ده، جربي كلمة تانية.</p>
+  </div>
+</section>
+
+<!-- ===== سكشن الأكثر طلبًا ===== -->
+<section class="trending-section" id="trending">
+  <div class="section-inner trending-inner" id="trending-content">
+    <!-- بيتملى ديناميكيًا من JS -->
+  </div>
+</section>
+
+<!-- ===== سكشن من نحن ===== -->
+<section class="about-section" id="about">
+  <div class="section-inner about-inner">
+    <div class="about-text">
+      <h2>من نحن</h2>
+      <p>مفروشات الزهرة بيت صغير لصناعة الملايات يدويًا، بنختار كل خامة بعناية وبنفصل كل طقم بحب عشان يبقى بيتك دافي وملوّن. مش مجرد ملاية… دي تفصيلة بتضيف روح لأوضتك.</p>
+    </div>
+    <div class="about-values">
+      <div class="value-item">
+        <span class="value-icon">🧵</span>
+        <p>تفصيل يدوي بالكامل</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🌸</span>
+        <p>خامات ناعمة ومختارة بعناية</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🛏️</span>
+        <p>أطقم كاملة مع المخدات</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الفوتر / التواصل ===== -->
+<footer class="site-footer" id="contact">
+  <div class="section-inner footer-inner">
+    <div class="footer-brand">
+      <img src="assets/logo.jpg" alt="مفروشات الزهرة" class="footer-logo">
+      <p>صناعة يدوية بحب لبيتك</p>
+    </div>
+    <div class="footer-contact">
+      <h3>تواصلي معنا</h3>
+      <p>واتساب / اتصال: <a href="tel:+201024421691">01024421691</a></p>
+      <p>فيسبوك: <a href="#">@mafroshat-zahra</a></p>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 مفروشات الزهرة. جميع الحقوق محفوظة.</p>
+</footer>
+
+<!-- ===== عربة الشراء ===== -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-panel" id="cart-panel">
+  <div class="cart-header">
+    <h3>عربة الشراء</h3>
+    <button class="icon-btn" id="cart-close" aria-label="إغلاق العربة">✕</button>
+  </div>
+
+  <div class="cart-items" id="cart-items">
+    <p class="cart-empty-msg" id="cart-empty-msg">العربة فاضية دلوقتي</p>
+  </div>
+
+  <div class="cart-footer" id="cart-footer" hidden>
+    <div class="cart-total-row">
+      <span>الإجمالي</span>
+      <span id="cart-total">٠ ج.م</span>
+    </div>
+
+    <form id="checkout-form" class="checkout-form">
+      <input type="text" id="cust-name" placeholder="الاسم بالكامل" required>
+      <input type="tel" id="cust-phone" placeholder="رقم الموبايل" required>
+      <textarea id="cust-address" placeholder="العنوان بالتفصيل" required></textarea>
+      <button type="submit" class="btn btn-primary btn-full">تأكيد الطلب</button>
+    </form>
+    <p class="order-status" id="order-status"></p>
+  </div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
