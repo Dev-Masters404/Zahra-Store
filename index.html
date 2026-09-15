@@ -131,12 +131,14 @@
     <div class="footer-contact">
       <h3>تواصلي معنا</h3>
       <p>واتساب / اتصال: <a href="tel:+201024421691">01024421691</a></p>
-      <p>فيسبوك: <a href="#">@mafroshat-zahra</a></p>
+      <p>انضم الى الجروب: <a class="btn-primary-2" href="https://chat.whatsapp.com/Cpft3jAKCX96BcTbtEQDJB?s=cl&p=a&mlu=0&ilr=4">انضم</a></p>
+      <p>فيسبوك: <a href="https://www.facebook.com/share/17tYx5Pbu9/">mafroshat-zahra@facebook.com</a></p>
     </div>
   </div>
   <p class="footer-copy">© 2026 مفروشات الزهرة. جميع الحقوق محفوظة.</p>
 </footer>
 
+<!-- ===== عربة الشراء ===== -->
 <!-- ===== عربة الشراء ===== -->
 <div class="cart-overlay" id="cart-overlay"></div>
 <aside class="cart-panel" id="cart-panel">
@@ -145,27 +147,69 @@
     <button class="icon-btn" id="cart-close" aria-label="إغلاق العربة">✕</button>
   </div>
 
-  <div class="cart-items" id="cart-items">
-    <p class="cart-empty-msg" id="cart-empty-msg">العربة فاضية دلوقتي</p>
-  </div>
-
-  <div class="cart-footer" id="cart-footer" hidden>
-    <div class="cart-total-row">
-      <span>الإجمالي</span>
-      <span id="cart-total">٠ ج.م</span>
+  <div class="cart-scroll">
+    <div class="cart-items" id="cart-items">
+      <p class="cart-empty-msg" id="cart-empty-msg">العربة فاضية دلوقتي</p>
     </div>
 
-    <form id="checkout-form" class="checkout-form">
-      <input type="text" id="cust-name" placeholder="الاسم بالكامل" required>
-      <input type="tel" id="cust-phone" placeholder="رقم الموبايل" required>
-      <textarea id="cust-address" placeholder="العنوان بالتفصيل" required></textarea>
-      <button type="submit" class="btn btn-primary btn-full">تأكيد الطلب</button>
-    </form>
-    <p class="order-status" id="order-status"></p>
+    <div class="cart-footer" id="cart-footer" hidden>
+      <div class="order-summary">
+        <div class="summary-row">
+          <span>المنتجات</span>
+          <span id="cart-subtotal">٠ ج.م</span>
+        </div>
+        <div class="summary-row">
+          <span>التوصيل</span>
+          <span id="cart-delivery">٤٠ ج.م</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>الإجمالي</span>
+          <span id="cart-total">٠ ج.م</span>
+        </div>
+      </div>
+
+      <div class="deposit-box">
+        <p class="deposit-title">لازم تحويل عربون 30% قبل تأكيد الطلب</p>
+        <p class="deposit-amount">قيمة العربون: <strong id="deposit-amount">٠ ج.م</strong></p>
+        <p class="deposit-instructions">حوليه على فودافون كاش رقم: <strong>01062704345</strong></p>
+        <p class="deposit-instructions">وابعتي سكرين شوت للتحويل واتساب على نفس الرقم</p>
+        <input type="text" id="deposit-reference" placeholder="اكتبي رقم موبايلك اللي حولتي منه" required>
+        <label class="confirm-checkbox">
+          <input type="checkbox" id="deposit-confirmed" required>
+          أكدت إني حولت العربون
+        </label>
+      </div>
+
+      <form id="checkout-form" class="checkout-form">
+        <input type="text" id="cust-name" placeholder="الاسم بالكامل" required>
+        <input type="tel" id="cust-phone" placeholder="رقم الموبايل" required>
+        <textarea id="cust-address" placeholder="العنوان بالتفصيل" required></textarea>
+
+        <p class="payment-label">طريقة دفع باقي المبلغ</p>
+        <div class="payment-methods">
+          <label class="radio-option">
+            <input type="radio" name="payment-method" value="إنستا باي" checked>
+            إنستا باي (01062704345)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="payment-method" value="فودافون كاش">
+            فودافون كاش (01062704345)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="payment-method" value="نقدي عند الاستلام">
+            نقدي عند الاستلام
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">تأكيد الطلب</button>
+      </form>
+      <p class="order-status" id="order-status"></p>
+    </div>
   </div>
 </aside>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>

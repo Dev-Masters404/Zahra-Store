@@ -1,6 +1,10 @@
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsWAlGj0TYr2snyCs_jlq2ovc56Fb0guAo0EjgkzZrKV1aAwnsys1qmtNfXKpP_DXmk0KQs7BARfl8/pub?gid=0&single=true&output=csv";     // رابط شيت المنتجات بصيغة CSV
 const ORDERS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGMm9UlRhJEfhxKMt8srflopGovwZ5ja3OyPJ3IL4r0-vMDbEIuFZLXB0wL9bueMU9lw/exec"; // رابط Google Apps Script لإرسال الطلبات
 
+const DELIVERY_FEE = 40;       // رسوم التوصيل الثابتة (ج.م)
+const DEPOSIT_PERCENT = 0.30;  // نسبة العربون من الإجمالي (30%)
+const PAYMENT_NUMBER = "01062704345"; // رقم فودافون كاش / إنستا باي (مؤقت لحد ما يتغير)
+
 const FALLBACK_PRODUCTS = [
   { id: 1,  name: "ملايا الفيروز",       category: "عامرية", price: 500, image: "images/melaya1.jpeg",  trending: false },
   { id: 2,  name: "ملايا روكا",          category: "عامرية", price: 500, image: "images/melaya2.jpeg",  trending: false },
@@ -175,7 +179,6 @@ function saveCart(){
 function renderCart(){
   const itemsWrap = document.getElementById("cart-items");
   const footer = document.getElementById("cart-footer");
-  const totalEl = document.getElementById("cart-total");
   const countEl = document.getElementById("cart-count");
 
   const totalQty = cart.reduce((sum,i)=>sum+i.qty, 0);
@@ -190,7 +193,10 @@ function renderCart(){
 
   itemsWrap.innerHTML = cart.map(i => `
     <div class="cart-item">
-      <img src="${i.image}" alt="${i.name}" onerror="this.style.opacity=0">
+      <div class="cart-item-img-wrap" data-label="${i.name}">
+        <img src="${i.image}" alt="${i.name}"
+             onerror="this.closest('.cart-item-img-wrap').classList.add('img-fallback')">
+      </div>
       <div class="cart-item-info">
         <h4>${i.name}</h4>
         <div class="cart-item-qty">
@@ -204,8 +210,15 @@ function renderCart(){
     </div>
   `).join("");
 
-  const total = cart.reduce((sum,i)=> sum + i.price * i.qty, 0);
-  totalEl.textContent = `${total} ج.م`;
+
+  const subtotal = cart.reduce((sum,i)=> sum + i.price * i.qty, 0);
+  const total = subtotal + DELIVERY_FEE;
+  const deposit = Math.ceil(total * DEPOSIT_PERCENT);
+
+  document.getElementById("cart-subtotal").textContent = `${subtotal} ج.م`;
+  document.getElementById("cart-delivery").textContent = `${DELIVERY_FEE} ج.م`;
+  document.getElementById("cart-total").textContent = `${total} ج.م`;
+  document.getElementById("deposit-amount").textContent = `${deposit} ج.م`;
 
   itemsWrap.querySelectorAll("[data-action]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
@@ -228,14 +241,29 @@ async function submitOrder(e){
   const name = document.getElementById("cust-name").value.trim();
   const phone = document.getElementById("cust-phone").value.trim();
   const address = document.getElementById("cust-address").value.trim();
+  const depositRef = document.getElementById("deposit-reference").value.trim();
+  const depositConfirmed = document.getElementById("deposit-confirmed").checked;
+  const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
 
   if (cart.length === 0) return;
+
+  if (!depositConfirmed || !depositRef){
+    statusEl.textContent = "لازم تأكدي إنك حولتِ العربون وتكتبي رقم التحويل قبل ما نبعت الطلب.";
+    statusEl.className = "order-status error";
+    return;
+  }
+
+  const subtotal = cart.reduce((sum,i)=> sum + i.price * i.qty, 0);
+  const total = subtotal + DELIVERY_FEE;
+  const deposit = Math.ceil(total * DEPOSIT_PERCENT);
+  const remaining = total - deposit;
 
   const order = {
     date: new Date().toISOString(),
     name, phone, address,
     items: cart.map(i => `${i.name} x${i.qty}`).join(" - "),
-    total: cart.reduce((sum,i)=> sum + i.price * i.qty, 0)
+    subtotal, delivery: DELIVERY_FEE, total,
+    deposit, depositRef, remaining, paymentMethod
   };
 
   if (!ORDERS_SCRIPT_URL){
