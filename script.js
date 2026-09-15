@@ -2,7 +2,7 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsWAlGj0
 const ORDERS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGMm9UlRhJEfhxKMt8srflopGovwZ5ja3OyPJ3IL4r0-vMDbEIuFZLXB0wL9bueMU9lw/exec"; // رابط Google Apps Script لإرسال الطلبات
 
 const DELIVERY_FEE = 40;       // رسوم التوصيل الثابتة (ج.م)
-const DEPOSIT_PERCENT = 0.30;  // نسبة العربون من الإجمالي (30%)
+const DEPOSIT_AMOUNT = 250;  // نسبة العربون من الإجمالي (30%)
 const PAYMENT_NUMBER = "01062704345"; // رقم فودافون كاش / إنستا باي (مؤقت لحد ما يتغير)
 
 const FALLBACK_PRODUCTS = [
@@ -213,7 +213,7 @@ function renderCart(){
 
   const subtotal = cart.reduce((sum,i)=> sum + i.price * i.qty, 0);
   const total = subtotal + DELIVERY_FEE;
-  const deposit = Math.ceil(total * DEPOSIT_PERCENT);
+  const deposit = DEPOSIT_AMOUNT;
 
   document.getElementById("cart-subtotal").textContent = `${subtotal} ج.م`;
   document.getElementById("cart-delivery").textContent = `${DELIVERY_FEE} ج.م`;
@@ -255,7 +255,7 @@ async function submitOrder(e){
 
   const subtotal = cart.reduce((sum,i)=> sum + i.price * i.qty, 0);
   const total = subtotal + DELIVERY_FEE;
-  const deposit = Math.ceil(total * DEPOSIT_PERCENT);
+  const deposit = DEPOSIT_AMOUNT;
   const remaining = total - deposit;
 
   const order = {
